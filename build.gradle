@@ -17,6 +17,7 @@ java {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
 }
 
 tasks.withType(Test) {
@@ -107,4 +108,3 @@ task deployReports(type: Exec, dependsOn: ['cleanWorkTree']) {
     workingDir = '.'
     commandLine = ['git', 'worktree', 'prune']
 }
-
