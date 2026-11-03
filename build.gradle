@@ -36,6 +36,26 @@ application { //Allows  ./gradlew run --args=path-to-test-data
 task copyHtml(type: Copy) {
     from 'src/main/html'
     into 'build/reports'
+
+    doLast {
+        def index = file('build/reports/index.md')
+
+        if (index.exists()) {
+            def content = index.getText('UTF-8')
+
+            content = content.replace(
+                './reports/tests/test/',
+                './tests/test/'
+            )
+
+            content = content.replace(
+                './reports/javadoc/',
+                './javadoc/'
+            )
+
+            index.setText(content, 'UTF-8')
+        }
+    }
 }
 
 // Copy JavaDoc into build/reports
